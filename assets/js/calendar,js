@@ -1,0 +1,60 @@
+const today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+
+const monthNames = ["Yanvar", "Fevral", "Mart", "Aprel", "May", "İyun", "İyul", "Avqust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"];
+
+function generateCalendar(month, year) {
+    const daysContainer = document.getElementById("daysContainer");
+    daysContainer.innerHTML = ""; 
+
+    const firstDayOfMonth = new Date(year, month, 1).getDay();
+    const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
+    const totalDaysInPreviousMonth = new Date(year, month, 0).getDate();
+
+    for (let i = firstDayOfMonth - 1; i >= 0; i--) {
+        const prevMonthDay = totalDaysInPreviousMonth - i;
+        const dayButton = document.createElement("button");
+        dayButton.className = "btn disabled-day day-button";
+        dayButton.textContent = prevMonthDay;
+        daysContainer.appendChild(dayButton);
+    }
+
+    for (let day = 1; day <= totalDaysInMonth; day++) {
+        const dayButton = document.createElement("button");
+        dayButton.className = "btn current-month-day day-button";
+        dayButton.textContent = day;
+
+        dayButton.onclick = function () {
+            window.location.href = `customday.html?date=${year}-${month + 1}-${day}`;
+        };
+
+        daysContainer.appendChild(dayButton);
+    }
+
+    const remainingDays = 42 - (firstDayOfMonth + totalDaysInMonth);
+    for (let nextMonthDay = 1; nextMonthDay <= remainingDays; nextMonthDay++) {
+        const dayButton = document.createElement("button");
+        dayButton.className = "btn disabled-day day-button";
+        dayButton.textContent = nextMonthDay;
+        daysContainer.appendChild(dayButton);
+    }
+
+    document.getElementById("monthYearText").textContent = `${monthNames[month]} ${year}`;
+}
+
+function changeMonth(direction) {
+    currentMonth += direction;
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    } else if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
+    generateCalendar(currentMonth, currentYear);
+}
+
+window.onload = function () {
+    generateCalendar(currentMonth, currentYear);
+};

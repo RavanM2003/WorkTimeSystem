@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Calendar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./assets/css/calendar.css">
+</head>
+<body class="bg-gray-100">
+<div class="calendarmain p-10">
+  <div class="calendar bg-white shadow-md rounded-lg p-5">
+    <div class="month-year flex justify-between items-center">
+      <button class="btn bg-blue-500 text-white p-2 rounded-md" onclick="changeMonth(-1)">Əvvəlki</button>
+      <span id="monthYearText" class="text-lg font-bold">October 2024</span>
+      <button class="btn bg-blue-500 text-white p-2 rounded-md" onclick="changeMonth(1)">Növbəti</button>
+    </div>
+
+    <div class="days-header grid grid-cols-7 gap-2 mt-4 text-center font-bold">
+      <div>B</div>
+      <div>B.E.</div>
+      <div>Ç.A.</div>
+      <div>Ç</div>
+      <div>C.A.</div>
+      <div>C</div>
+      <div>Ş</div>
+    </div>
+
+    <div class="days grid grid-cols-7 gap-2 mt-2" id="daysContainer">
+    </div>
+  </div>
+</div>
+
+<script src="./assets/js/calendar,js"></script>
+</body>
+</html>
